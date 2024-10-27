@@ -16,6 +16,7 @@
                         <th>Nombre del Negocio</th>
                         <th>Dirección</th>
                         <th>Teléfono</th>
+                        <th>Imágen</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,9 @@
                         <td th:text="${maker.name}"></td>
                         <td th:text="${maker.address}"></td>
                         <td th:text="${maker.phone}"></td>
+                        <td>
+                            <img th:if="${maker.imgURL != null}" th:src="${maker.imgURL}" alt="Imagen de perfil" style="width: 100px; height: 100px;" />
+                        </td>
                     </tr>
                 </tbody>
             </table>

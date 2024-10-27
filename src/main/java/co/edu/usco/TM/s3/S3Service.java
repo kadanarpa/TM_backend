@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
@@ -25,14 +26,17 @@ public class S3Service implements IS3Service {
         try {
 
             String fileName = file.getOriginalFilename();
+            String keyName = UUID.randomUUID() + "_" + fileName;
+
             PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                     .bucket("tomas-pet-bucket")
-                    .key(UUID.randomUUID() + "_" + fileName)
+                    .key(keyName)
+                    .acl(ObjectCannedACL.PUBLIC_READ)
                     .build();
             s3client.putObject(putObjectRequest, RequestBody.fromBytes(file.getBytes()));
 
             return s3client.utilities().getUrl(builder -> {
-                builder.bucket("tomas-pet-bucket").key(fileName);
+                builder.bucket("tomas-pet-bucket").key(keyName);
             }).toExternalForm();
 
         } catch (IOException ex) {

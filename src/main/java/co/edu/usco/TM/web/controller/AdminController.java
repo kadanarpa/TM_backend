@@ -1,7 +1,6 @@
 
 package co.edu.usco.TM.web.controller;
 
-import co.edu.usco.TM.dto.request.MakerDTO;
 import co.edu.usco.TM.persistence.entity.commerce.Maker;
 import co.edu.usco.TM.web.client.MakerClient;
 import java.util.UUID;
