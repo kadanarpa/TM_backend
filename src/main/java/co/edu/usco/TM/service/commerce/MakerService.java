@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.edu.usco.TM.persistence.repository.MakerRepository;
 import co.edu.usco.TM.persistence.repository.RoleRepository;
+import co.edu.usco.TM.s3.S3Service;
+import java.io.IOException;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MakerService implements IMakerService{
@@ -18,6 +21,9 @@ public class MakerService implements IMakerService{
     
     @Autowired
     RoleRepository roleRepo;
+    
+    @Autowired
+    S3Service s3Service;
     
     @Override
     public List<Maker> findAll() {
@@ -31,7 +37,16 @@ public class MakerService implements IMakerService{
     
     @Override
     public void save(Maker maker) {
-        //maker.setRole(roleRepo.);
+        
+        maker.setRole(roleRepo.findByName("MAKER"));
+        makerRepo.save(maker);
+    }
+    
+    @Override
+    public void uploadWithImage(Maker maker, MultipartFile file) throws IOException {
+        
+        maker.setImgURL(s3Service.uploadFile(file));
+        maker.setRole(roleRepo.findByName("MAKER"));
         makerRepo.save(maker);
     }
     

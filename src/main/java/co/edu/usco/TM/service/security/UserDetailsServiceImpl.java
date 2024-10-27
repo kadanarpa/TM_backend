@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         
         List<SimpleGrantedAuthority> roleList = new ArrayList<>();
         
-        roleList.add(new SimpleGrantedAuthority("ROLE_".concat(user.getRole().getName().name())));
+        roleList.add(new SimpleGrantedAuthority("ROLE_".concat(user.getRole().getName())));
         
         return new User(user.getUsername(), user.getPassword(), roleList);
     }

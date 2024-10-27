@@ -1,7 +1,6 @@
 package co.edu.usco;
 
 import co.edu.usco.TM.persistence.entity.administration.Role;
-import co.edu.usco.TM.persistence.entity.administration.RoleEnum;
 import co.edu.usco.TM.persistence.entity.commerce.Maker;
 import co.edu.usco.TM.persistence.repository.MakerRepository;
 import co.edu.usco.TM.persistence.repository.RoleRepository;
@@ -24,19 +23,19 @@ public class TMRestApplication {
             
                 // Roles
                 Role adminRole = Role.builder()
-                        .name(RoleEnum.ADMIN)
+                        .name("ADMIN")
                         .build();
                 
                 Role makerRole = Role.builder()
-                        .name(RoleEnum.MAKER)
+                        .name("MAKER")
                         .build();
                 
                 Role ownerRole = Role.builder()
-                        .name(RoleEnum.OWNER)
+                        .name("OWNER")
                         .build();
                 
                 Role vetRole = Role.builder()
-                        .name(RoleEnum.VETERINARIAN)
+                        .name("VETERINARIAN")
                         .build();
                 
                 // Makers
